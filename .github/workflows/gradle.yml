@@ -34,7 +34,7 @@ jobs:
     - name: Build Gradle Jar
       run: ./gradlew clean build
     - name: Get plugin version
-      run: echo ::set-output name=version::$(gradle properties -q | grep "BUILD_VERSION:" | awk '{print $2}')
+      run: echo ::set-output name=version::$(./gradlew properties -q | grep "BUILD_VERSION:" | awk '{print $2}')
       id: plugin_version
     - name: Rename Output Jar
       run: mv ./build/reobfJar/output.jar ./build/reobfJar/inventories-forge-${{ steps.plugin_version.outputs.version }}.jar
