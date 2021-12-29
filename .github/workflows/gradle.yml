@@ -29,8 +29,6 @@ jobs:
       id: list
       run: ls -a
     - name: Build Gradle Jar
-      with:
-        run: ./gradlew build
+      run: ./gradlew build
     - name: Rename Output Jar
-      with:
-        run: mv ./build/reobfJar/output.jar ./build/reobfJar/inventories-forge-1.0.0.jar
+      run: mv ./build/reobfJar/output.jar ./build/reobfJar/inventories-forge-1.0.0.jar
