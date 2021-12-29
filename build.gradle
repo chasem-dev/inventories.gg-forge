@@ -1,0 +1,97 @@
+buildscript {
+    repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.2'
+    }
+}
+
+plugins {
+    id "com.github.johnrengelman.shadow" version "2.0.2"
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+
+
+version = "1.0.0"
+group = "dev.chasem"
+archivesBaseName = "inventories"
+
+sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+compileJava {
+    sourceCompatibility = targetCompatibility = '1.8'
+}
+
+
+minecraft {
+    mappings channel: 'snapshot', version: '20171003-1.12'
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+        }
+
+        server {
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+        }
+    }
+}
+repositories {
+    jcenter()
+
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/Xwaffle1/inventories-core")
+        credentials {
+            username = "Xwaffle1"
+            password = "${{ secrets.GH_TOKEN }}"
+        }
+    }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2858'
+    shadow 'dev.chasem:inventories-core:1.0.1-SNAPSHOT-jdk8'
+}
+
+shadowJar {
+    project.configurations.shadow.setTransitive(true);
+    configurations = [project.configurations.shadow]
+
+    relocate "org.apache.http", "dev.chasem.shadow.org.apache.http"
+    relocate "org.apache.commons", "dev.chasem.shadow.org.apache.commons"
+
+    classifier '' // Replace the default JAR
+}
+
+reobf {
+    shadowJar {} // Reobfuscate the shadowed JAR
+}
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"     : "mymod",
+                "Specification-Vendor"    : "glorious",
+                "Specification-Version"   : "1",
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : "${version}",
+                "Implementation-Vendor"   : "glorious",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}

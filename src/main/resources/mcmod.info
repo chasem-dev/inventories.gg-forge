@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "inventories.gg",
+    "name": "Inventories.gg",
+    "description": "Inventories.gg Forge Mod",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://inventories.chasem.dev/",
+    "updateUrl": "",
+    "authorList": ["Xwaffle"],
+    "credits": "Proxying, asyncRobert",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]

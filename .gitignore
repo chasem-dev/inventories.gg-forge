@@ -1,0 +1,32 @@
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+
+# Files from Forge MDK
+forge*changelog.txt
+changelog.txt
+CREDITS.txt
+LICENSE.txt
+LICENSE-Paulscode IBXM Library.txt
+LICENSE-Paulscode SoundSystem CodecIBXM.txt
+README.txt
+libs/PixelmonGenerations-1.12.2-8.6.1.jar
