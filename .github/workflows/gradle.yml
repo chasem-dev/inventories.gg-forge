@@ -28,7 +28,7 @@ jobs:
     - name: Load GH_TOKEN from secrets
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      run: echo GH_TOKEN=\"$GH_TOKEN\" >> ./gradle.properties
+      run: echo GH_TOKEN=$GH_TOKEN >> ./gradle.properties
     - name: CAT GRADLE PROPS
       run: cat ./gradle.properties
     - name: Build Gradle Jar
