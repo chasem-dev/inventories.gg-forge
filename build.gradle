@@ -17,7 +17,8 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle'
 
 
-version = "1.0.0"
+
+version = BUILD_VERSION
 group = "dev.chasem"
 archivesBaseName = "inventories"
 

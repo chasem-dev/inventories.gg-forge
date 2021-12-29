@@ -33,5 +33,21 @@ jobs:
       run: cat ./gradle.properties
     - name: Build Gradle Jar
       run: ./gradlew clean build
+    - name: Get plugin version
+      run: echo ::set-output name=version::$(gradle properties -q | grep "BUILD_VERSION:" | awk '{print $2}')
+      id: plugin_version
     - name: Rename Output Jar
-      run: mv ./build/reobfJar/output.jar ./build/reobfJar/inventories-forge-1.0.0.jar
+      run: mv ./build/reobfJar/output.jar ./build/reobfJar/inventories-forge-${{ steps.plugin_version.outputs.version }}.jar
+    - name: Get Short Commit Hash
+      id: commit_hash
+      run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+    - name: Generate release tag
+      id: tag
+      run: |
+        echo "::set-output name=release_tag::Inventories_forge_${{ steps.plugin_version.outputs.version }}_${{ steps.commit_hash.outputs.sha_short }}"
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: ./build/reobfJar/inventories-forge-${{ steps.plugin_version.outputs.version }}.jar
+        tag_name: ${{ steps.tag.outputs.release_tag }}
+        token: ${{ secrets.GH_TOKEN }}
