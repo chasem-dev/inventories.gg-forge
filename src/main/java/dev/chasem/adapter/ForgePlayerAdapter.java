@@ -23,9 +23,9 @@ public class ForgePlayerAdapter extends PlayerAdapter<EntityPlayerMP, ForgeItemA
 
         playerInfo.addProperty("level", player.experienceLevel);
 
-        playerInfo.addProperty("exp", (player.experience / (player.xpBarCap() * 1.00)));
+        playerInfo.addProperty("exp", player.experience);
         playerInfo.addProperty("totalExp", player.experienceTotal);
-        playerInfo.addProperty("expToLevel", player.experience);
+        playerInfo.addProperty("expToLevel", (player.experience / (player.xpBarCap() * 1.00)));
 
         playerInfo.addProperty("health", player.getHealth());
         playerInfo.addProperty("hunger", player.getFoodStats().getFoodLevel());
