@@ -23,12 +23,6 @@ archivesBaseName = "inventories"
 
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-def GH_TOKEN = properties.getProperty('GH_TOKEN')
-
-println("GH_TOKEN: " + GH_TOKEN)
-
 compileJava {
     sourceCompatibility = targetCompatibility = '1.8'
 }
@@ -58,6 +52,7 @@ minecraft {
         }
     }
 }
+
 repositories {
     jcenter()
 
@@ -65,7 +60,7 @@ repositories {
         name = "GitHubPackages"
         url = uri("https://maven.pkg.github.com/Xwaffle1/inventories-core")
         credentials {
-            username = "Xwaffle1"
+            username = GH_USERNAME
             password = GH_TOKEN
         }
     }
