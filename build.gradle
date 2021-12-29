@@ -58,7 +58,7 @@ repositories {
         url = uri("https://maven.pkg.github.com/Xwaffle1/inventories-core")
         credentials {
             username = "Xwaffle1"
-            password = "${{ secrets.GH_TOKEN }}"
+            password = ${{ secrets.GH_TOKEN }}
         }
     }
 }
