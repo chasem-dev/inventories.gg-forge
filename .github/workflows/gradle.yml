@@ -32,7 +32,9 @@ jobs:
     - name: CAT GRADLE PROPS
       run: cat ./gradle.properties
     - name: Build Gradle Jar
-      run: ./gradlew clean build
+      run: ./gradlew build
+    - name: List reobfJar
+      run: ls -a ./build && ls -a ./build/reobfShadowJar
     - name: Get plugin version
       run: echo ::set-output name=version::$(gradle properties -q | grep "BUILD_VERSION:" | awk '{print $2}')
       id: plugin_version
