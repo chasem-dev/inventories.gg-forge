@@ -28,7 +28,9 @@ jobs:
     - name: List Files?
       id: list
       run: ls -a
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@4137be6a8bf7d7133955359dbd952c0ca73b1021
+    - name: Build Gradle Jar
       with:
-        arguments: build
+        run: ./gradlew build
+    - name: Rename Output Jar
+      with:
+        run: mv ./build/reobfJar/output.jar ./build/reobfJar/inventories-forge-1.0.0.jar
