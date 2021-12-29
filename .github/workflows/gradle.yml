@@ -37,7 +37,7 @@ jobs:
       run: echo ::set-output name=version::$(./gradlew properties -q | grep "BUILD_VERSION:" | awk '{print $2}')
       id: plugin_version
     - name: Rename Output Jar
-      run: mv ./build/reobfJar/output.jar ./build/reobfJar/inventories-forge-${{ steps.plugin_version.outputs.version }}.jar
+      run: mv ./build/reobfShadowJar/output.jar ./build/reobfShadowJar/inventories-forge-${{ steps.plugin_version.outputs.version }}.jar
     - name: Get Short Commit Hash
       id: commit_hash
       run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
