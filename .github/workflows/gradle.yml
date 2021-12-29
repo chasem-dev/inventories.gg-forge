@@ -29,8 +29,6 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: echo GH_TOKEN=$GH_TOKEN >> ./gradle.properties
-    - name: CAT GRADLE PROPS
-      run: cat ./gradle.properties
     - name: Build Gradle Jar
       run: ./gradlew build
     - name: List reobfJar
@@ -50,6 +48,6 @@ jobs:
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
-        files: ./build/reobfJar/inventories-forge-${{ steps.plugin_version.outputs.version }}.jar
+        files: ./build/reobfShadowJar/inventories-forge-${{ steps.plugin_version.outputs.version }}.jar
         tag_name: ${{ steps.tag.outputs.release_tag }}
         token: ${{ secrets.GH_TOKEN }}
