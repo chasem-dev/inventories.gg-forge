@@ -25,9 +25,10 @@ jobs:
       with:
         java-version: '8'
         distribution: 'adopt'
-    - name: List Files?
-      id: list
-      run: ls -a
+    - name: Load GH_TOKEN from secrets
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: echo GH_TOKEN=\"$GH_TOKEN\" > ./local.properties
     - name: Build Gradle Jar
       run: ./gradlew build
     - name: Rename Output Jar
