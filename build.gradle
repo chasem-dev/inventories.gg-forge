@@ -69,7 +69,7 @@ repositories {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2858'
-    shadow 'dev.chasem:inventories-core:1.0.1-SNAPSHOT-jdk8'
+    shadow 'dev.chasem:inventories-core:1.0.1c-SNAPSHOT-jdk8'
 }
 
 shadowJar {
