@@ -4,13 +4,19 @@ import dev.chasem.adapter.ForgePlayerAdapter;
 import gg.inventories.InventoriesCore;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 @Mod(modid = InventoriesForge.MODID, name = InventoriesForge.NAME, version = InventoriesForge.VERSION, acceptableRemoteVersions = "*", serverSideOnly = true)
 public class InventoriesForge {
@@ -45,6 +51,18 @@ public class InventoriesForge {
         } else {
             InventoriesCore.setClientSecret(getClientSecret());
         }
+    }
+
+    @EventHandler
+    public void onServerStart(FMLServerStartedEvent event) {
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                for (EntityPlayerMP player : FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayers()) {
+                    syncPlayer(player);
+                }
+            }
+        }, 0, 1000 * 60 * 2); // 2 minutes
     }
 
     @SubscribeEvent
